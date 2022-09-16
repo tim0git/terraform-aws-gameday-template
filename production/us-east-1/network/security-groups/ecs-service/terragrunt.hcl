@@ -40,6 +40,6 @@ inputs = {
   ]
 
   egress_cidr_blocks = ["0.0.0.0/0"]
-  egress_rules       = ["http-80-tcp", "https-443-tcp","dns-udp", "dns-tcp", "psql-5432-tcp", "mysql-3306-tcp"]
+  egress_rules       = ["http-80-tcp", "https-443-tcp","dns-udp", "dns-tcp", "postgresql-tcp", "mysql-tcp"]
 }
 
