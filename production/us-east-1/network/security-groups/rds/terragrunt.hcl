@@ -41,10 +41,10 @@ inputs = {
       source_security_group_id = dependency.ecs_service_sg.outputs.security_group_id
     },
     {
-      from_port   = 5432
-      to_port     = 5432
+      from_port   = 3306
+      to_port     = 3306
       protocol    = "tcp"
-      description = "PostgreSQL access from EC2 Autoscaling Group"
+      description = "MySQL/Aurora access from EC2 Autoscaling Group"
       source_security_group_id = dependency.autoscaling_group_sg.outputs.security_group_id
     }
   ]
