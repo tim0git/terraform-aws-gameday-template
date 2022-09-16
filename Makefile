@@ -4,7 +4,7 @@ preflight check:
 	aws --version
 
 configure aws profile:
-	aws configure --profile UnicronRentalsProduction
+	aws configure --profile UnicornRentalsProduction
 
 set aws cli default profile:
 	export AWS_DEFAULT_PROFILE=UnicornRentalsProduction
