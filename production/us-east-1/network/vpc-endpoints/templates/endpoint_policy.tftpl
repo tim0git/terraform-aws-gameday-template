@@ -1,0 +1,16 @@
+{
+  "Version": "2008-10-17",
+  "Statement": [
+    {
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": "${action}",
+      "Resource": "*",
+      "Condition": {
+        "StringNotEquals": {
+          "aws:sourceVpce": "${vpc_id}"
+        }
+      }
+    }
+  ]
+}
