@@ -10,13 +10,14 @@ set aws cli default profile:
 	export AWS_DEFAULT_PROFILE=UnicornRentalsProduction
 
 vpc:
-	terragrunt apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/vpc
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/vpc
 
 log buckets:
-	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/logs/
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/logs/s3-access
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/logs/public-alb-access
 
 cluster:
-	terragrunt apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/netwrok/clusters/ecs/common
+	terragrunt apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/clusters/ecs/common
 
 security groups:
 	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/security-groups
