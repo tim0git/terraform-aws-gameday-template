@@ -24,11 +24,11 @@ security_groups_alb_endpoints:
 	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/security-groups/vpc-endpoints
 
 security_groups_ecs_autoscaling_group:
-	terragrunt run-all destroy --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/security-groups/autoscaling-group
-	terragrunt run-all destroy --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/security-groups/ecs-service
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/security-groups/autoscaling-group
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/security-groups/ecs-service
 
 security_groups_rds:
-	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/security-groups/rds
+	terragrunt run-all destroy --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/security-groups/rds
 
 vpc_endpoints:
 	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/vpc-endpoints
