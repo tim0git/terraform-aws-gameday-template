@@ -43,7 +43,7 @@ aurora_serverless:
 	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/aurora
 
 dynamodb:
-	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/dynamodb
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/dynamo
 
 rds:
 	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/rds
