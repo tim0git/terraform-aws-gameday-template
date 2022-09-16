@@ -1,51 +1,59 @@
-preflight check:
+preflight_check:
 	terragrunt -v
 	terraform -v
 	aws --version
 
-configure aws profile:
+configure_aws_profile:
 	aws configure --profile UnicornRentalsProduction
 
-set aws cli default profile:
+set_aws_cli_default_profile:
 	export AWS_DEFAULT_PROFILE=UnicornRentalsProduction
 
 vpc:
 	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/vpc
 
-log buckets:
+log_buckets:
 	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/logs/s3-access
 	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/logs/public-alb-access
 
 cluster:
-	terragrunt apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/clusters/ecs/common
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/clusters/ecs/common
 
-security groups:
-	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/security-groups
+security_groups_alb_endpoints:
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/security-groups/public-application-load-balancer
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/security-groups/vpc-endpoints
 
-vpc endpoints:
-	terragrunt apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/vpc-endpoints
+security_groups_ecs_autoscaling_group:
+	terragrunt run-all destroy --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/security-groups/autoscaling-group
+	terragrunt run-all destroy --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/security-groups/ecs-service
 
-public load balancer:
-	terragrunt apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/load-balancers/public
+security_groups_rds:
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/security-groups/rds
 
-autoscaling group:
-	terragrunt apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/services/unicorn-rentals/autoscaling-group-ec2
+vpc_endpoints:
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/vpc-endpoints
 
-aurora serverless:
-	terragrunt apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/aurora
+public_load_balancer:
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/load-balancers/public
+
+autoscaling_group:
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/services/unicorn-rentals/autoscaling-group-ec2
+
+aurora_serverless:
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/aurora
 
 dynamodb:
-	terragrunt apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/dynamodb
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/dynamodb
 
 rds:
-	terragrunt apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/rds
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/rds
 
-get aurora database credentials:
+get_aurora_database_credentials:
 	terragrunt output cluster_master_username --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/aurora
 	terragrunt output cluster_master_password --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/aurora
 
-detect changes to security groups:
-	terragrunt plan --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/security-groups
+detect_changes_to_security_groups:
+	terragrunt run-all plan --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/security-groups
 
-detect changes to vpc:
+detect_changes_to_vpc:
 	terragrunt plan --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/vpc
