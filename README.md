@@ -116,7 +116,7 @@ In the terminal run `make security_groups_rds`
 
 You can completely customise these, just remember that you score points for well architected. So don't go full cowboy ;-). 
 
-### How about we don't use the internet? 🚫
+### Unicorns don't use the internet? 🚫
 
 Now we are going to be using aws managed services. It's just a fact of life, something is going to have be kept in secrets or parameter store and you dont want to send all of your valuable logs ect out over the public internet so its time to create some private connections between these services and your VPC.
 
@@ -188,7 +188,7 @@ You can build the ecs service with `make ecs_service`
 
 Once you have stood up the default app you can navigate to the load balancer public endpoint and see the response by using curl or the browser.
 
-### Opps! I need somewhere to store my stuff. (database) 📦
+### Opps! I need somewhere to store my unicorns. (database) 📦
 
 Now you may or may not need a database. But if you do, you can use this template to create one.
 
