@@ -163,6 +163,8 @@ Its upto you. you can use both or either. Or start with one and migrate to the o
 
 You can build the autoscaling group with `make autoscaling_group`
 
+We have configured a default web app in the user data, you can change this to whatever you want. We would recommend using it for the first deployment to test e2e the that you are serving traffic. 
+
 We have set this up to scale at 50% cpu load. In addition, it will spin up three t3.medium instances, one in each AZ and configure the machine using the user data template.
 
 You can completely customise this configuration, by changing the variables in here: production/us-east-1/services/unicorn-rentals/autoscaling-group-ec2/terragrunt.hcl
@@ -184,7 +186,7 @@ Once its up you can navigate to the load balancer public endpoint and see the re
 
 You can build the ecs service with `make ecs_service`
 
-Once its up you can navigate to the load balancer public endpoint and see the response by using curl or the browser.
+Once you have stood up the default app you can navigate to the load balancer public endpoint and see the response by using curl or the browser.
 
 ### Opps! I need somewhere to store my stuff. (database) 📦
 
@@ -318,4 +320,3 @@ Alternatively AWS offer a service that can help diagnose network issues. Search 
 15. [x] Create Aurora DB
 16. [x] Create RDS DB
 ------------------------------------------------------------------------
-
