@@ -12,13 +12,13 @@ locals {
   aws_region                 = local.region_vars.locals.aws_region
 
   min_size          = 3
-  max_size          = 12
+  max_size          = 24
   desired_capacity  = 3
   image_id          = "ami-05fa00d4c63e32376" # Amazon Linux 2 AMI (HVM), SSD Volume Type
   instance_type     = "t3.medium" # Bursting instance, so we don't pay for unused capacity use t3.2xlarge for production
 
   estimated_instance_warmup = 240 # 4 minutes
-  target_tracking_value     = 100 # 100 requests per minute
+  target_tracking_value     = 100 # 100 requests per target
 
   user_data = templatefile("./templates/user_data.tftpl", {})
 }
