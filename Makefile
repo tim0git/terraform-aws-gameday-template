@@ -40,17 +40,28 @@ autoscaling_group:
 	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/services/unicorn-rentals/autoscaling-group-ec2
 
 aurora_serverless:
-	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/aurora
+	terragrunt run-all destroy --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/aurora
 
 dynamodb:
 	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/dynamo
 
 rds:
-	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/rds
+	terragrunt run-all destroy --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/rds
 
 get_aurora_database_credentials:
 	terragrunt output cluster_master_username --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/aurora
 	terragrunt output cluster_master_password --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/aurora
+	terragrunt output cluster_port --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/aurora
+	terragrunt output cluster_database_name --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/aurora
+	terragrunt output cluster_endpoint --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/aurora
+	terragrunt output cluster_reader_endpoint --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/aurora
+
+get_rds_database_credentials:
+	terragrunt output db_instance_username --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/rds
+	terragrunt output db_instance_password --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/rds
+	terragrunt output db_instance_port --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/rds
+	terragrunt output db_instance_name --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/rds
+	terragrunt output db_instance_endpoint --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/rds
 
 detect_changes_to_security_groups:
 	terragrunt run-all plan --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/security-groups

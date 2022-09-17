@@ -13,6 +13,8 @@ module "aurora_serverless_v2" {
   engine_version    = data.aws_rds_engine_version.aurora.version
   storage_encrypted = true
 
+  database_name     = var.database_name
+
   create_db_subnet_group = false
   db_subnet_group_name   = var.name
 
@@ -25,6 +27,9 @@ module "aurora_serverless_v2" {
 
   apply_immediately   = true
   skip_final_snapshot = true
+
+  copy_tags_to_snapshot = true
+  deletion_protection   = true
 
   db_parameter_group_name         = aws_db_parameter_group.aurora_serverless.id
   db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.aurora_serverless.id

@@ -12,7 +12,7 @@ locals {
 }
 
 terraform {
-  source = "./module"
+  source = ".//module"
 }
 
 include {
@@ -27,7 +27,7 @@ inputs = {
 
   name = "${local.account_name}"
 
-  deletion_protection     = true
+  database_name = "unicornrentals"
 
   database_engine_configuration = {
     engine  = "aurora-postgresql" # "aurora-mysql"

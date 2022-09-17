@@ -43,3 +43,8 @@ variable "scaling_configuration" {
   })
   description = "Scaling configuration min and max capacity"
 }
+
+variable "database_name" {
+  type = string
+  description = "Database name"
+}
