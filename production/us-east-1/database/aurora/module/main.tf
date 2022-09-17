@@ -41,6 +41,7 @@ module "aurora_serverless_v2" {
   instances = {
     one = {}
     two = {}
+    three = {}
   }
 }
 

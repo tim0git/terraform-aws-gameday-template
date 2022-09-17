@@ -40,7 +40,7 @@ inputs = {
   private_subnets_cidr_blocks = dependency.vpc_module.outputs.private_subnets_cidr_blocks
 
   scaling_configuration = {
-    min_capacity = 2
-    max_capacity = 10
+    min_capacity = 5 #10GB, Database capacity is measured in Aurora Capacity Units (ACUs). 1 ACU provides 2 GiB of memory and corresponding compute and networking.
+    max_capacity = 50 #100GB
   }
 }
