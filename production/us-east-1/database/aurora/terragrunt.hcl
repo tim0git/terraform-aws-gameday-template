@@ -27,8 +27,6 @@ inputs = {
 
   name = "${local.account_name}"
 
-  database_name = "unicornrentals"
-
   database_engine_configuration = {
     engine  = "aurora-postgresql" # "aurora-mysql"
     version = "13.6" # "8.0.mysql_aurora.3.02.0"

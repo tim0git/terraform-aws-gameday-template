@@ -40,7 +40,7 @@ output "cluster_engine_version_actual" {
 # database_name is not set on `aws_rds_cluster` resource if it was not specified, so can't be used in output
 output "cluster_database_name" {
   description = "Name for an automatically created database on cluster creation"
-  value       = var.name
+  value       = "postgres"
 }
 
 output "cluster_port" {

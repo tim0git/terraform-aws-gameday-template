@@ -13,8 +13,6 @@ module "aurora_serverless_v2" {
   engine_version    = data.aws_rds_engine_version.aurora.version
   storage_encrypted = true
 
-  database_name     = var.database_name
-
   create_db_subnet_group = false
   db_subnet_group_name   = var.name
 
