@@ -117,13 +117,19 @@ We have tried to give you a broad spectrum of options here.
 
 #### RDS
 
-We have the tried and trusted rds. We have set this up as a autoscaling, postgres multi AZ instance. I haven't set up a read replica, if you need one you can do that in the console with two clicks.
+We have the tried and trusted rds. We have set this up as a autoscaling, postgres multi AZ instance. 
+
+I haven't set up a read replica, if you need one you can do that in the console with two clicks.
+
+Docs are here: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html
 
 If you need to create a mysql instance you can do that by changing the values here.
 
 `production/us-east-1/database/rds/terragrunt.hcl`
 
-We have left the mysql values in a comment to the right of the postgres ones. Don't forget to change the port, parameters and enabled_cloudwatch_logs_exports values .. ;-).
+We have left the mysql values in a comment to the right of the postgres ones. 
+
+Don't forget to change the port, parameters and enabled_cloudwatch_logs_exports values .. ;-).
 
 Okay we can spice things up a bit with option 2.
 
@@ -139,7 +145,9 @@ Again this has been set up as a postgres db, but you can change the values here 
 
 > Be warned. Databases take 20 min's to spin up!. So use that time wisely. There are some suggestions for additional services you can configure in the console at the end.
 
-**Don't panic if you choose rds and then want aurora later on. You can convert rds to aurora ect reasonably easily in the console.**
+**Don't panic if you choose rds and then want aurora later on. You can convert rds to aurora reasonably easily in the console.**
+
+Docs are here: https://aws.amazon.com/getting-started/hands-on/migrate-rdsmysql-to-auroramysql/
 
 >One *GOTCHA* with aurora. The database creds are generated for you. These are sensitive so you wont see them in the console or the terminal after a plan.
 
@@ -162,6 +170,17 @@ This isn't a fully optimised dynamodb with local secondary indexes ect. But for 
 All databases are encrypted and have automated backup / maintenance. We haven't added cross region replication as for the rds databases that would require a customer managed kms key.
 
 We have tried to keep this simple and easy to work with. If you fancy going all SUPER highly redundant and replicating your backups to another Region have at it!.
+
+#### RDS Proxy?
+
+You may want to create an RDS proxy. 
+
+This is a proxy that sits in front of your database and handles the connections. RDS Proxy is a great way to scale your database. It can also help with failover in your multi AZ deployment.
+
+There is a 12-minute video here: https://www.youtube.com/watch?v=ULRnn6tIYu8
+
+And it's easy to set up in the console. Doce are here: https://docs.amazonaws.cn/en_us/AmazonRDS/latest/UserGuide/rds-proxy-setup.html
+
 ### Take a break, you've earned it ☕️.
 
 Once you have your infra up and running, get a brew and have a look at all the other services AWS has to offer. 
