@@ -10,6 +10,56 @@ How to use this template:
 
 We have provided a make file for those not familiar with terragrunt commands.
 
+### Game Day Tip's.
+
+The start of Game Day is hectic to say the least. 
+
+Take a few minutes to read everything they give you.
+
+Log into the account provided and create some CLI access and secret keys if they haven't been provided.
+
+Don't go all least privileged too quick, attach the admin policy to your user and take a look around.
+
+Take it for granted that if they give you infra... It's going to be a mess.
+
+Get the team together, grab a whiteboard and draw out a plan, infra diagram and all.
+
+List the steps to execute that plan and assign team members to each task.
+
+Don't be afraid to ask for help, the AWS staff and DevOps Team are there to help you.
+
+### Game narrative:
+
+Unicorn.Rental has overcome all the scandals and problems that have affected us in the past and is now becoming a successful start-up, reinforcing our status as the leader in the Legendary Animals Rental Market (LARM). Our success however is leading to new problems of scale. To address this, we have decided to move to a franchise operational model, where you and your counterparts will be operating one of our franchises. In addition to being able to launder funds through a myriad of shell companies ... I mean, provide a localized, community based front to our operations, this will allow us at HQ to invest in innovation and evolve our product offerings so that we remain number one!
+
+Your main task is to build the infrastructure required to support the lease of unicorns, and then optimize that infrastructure and keep it running, You'll also need to manage the stock levels of unicorns and perform marketing-related tasks to promote your franchise and unlock new types of unicorns to rent out to the masses. You optionally might also have to physically track down unicorns that may have wandered out of our stables.
+
+Time is of the essence though, because three hours after the game starts, will be the start of...
+
+RAINBOW DAY!
+
+You've heard of Black Friday and Cyber Monday, but those both pale in comparison to Rainbow Day! Rainbow Day will be our biggest customer event ever and we expect to see the sky painted with rainbow-colored uni-contrails, but this will also have an impact on your franchise. During Rainbow Day, we expect you to have your infrastructure running and able to handle the load, to use AI services to ensure that you have the appropriate levels of stock on hand to ensure that unicorns get to hirers, and to ensure that everyone knows how special Rainbow Day actually is! The franchises that do these tasks the best will have eternal glory bestowed upon them.
+
+
+Key Objectives:
+
+1. Build Infra for Unicorn.Rentals
+2. Optimize Infra for Unicorn.Rentals
+3. Keep Infra running for Unicorn.Rentals
+4. Manage Unicorn Stock Levels
+5. Perform Marketing Tasks
+6. Track down Unicorns that have wandered out of the stables
+7. Maintain service during Rainbow Day load.
+8. Use AI services to ensure that you have the appropriate levels of stock on hand to ensure that unicorns get to hirers.
+
+The devops team believe that you are going to have to provision some compute (that can scale), expose the application running on that compute to the public.
+
+You may need a database to store the unicorn stock levels and possibly a SES and some lambdas to handle marketing.
+
+You may need to use some AI services (Sagemaker) to ensure that you have the appropriate levels of stock on hand to ensure that unicorns get to hirers.
+
+That's alot to get stood up in three hours! Good luck! ☘️
+
 ### Okay let's get started. 🏁
 
 In the terminal run `make vpc`
@@ -19,7 +69,7 @@ In the terminal run `make vpc`
 
 The VPC has been configured with three NAT Gateways and a Internet Gateway. The NAT Gateway is used to allow the private subnets to access the internet. The Internet Gateway is used to allow the public subnets to access the internet.
 
-VPC flow logs are enabled and you can see them in cloudwatch.
+VPC flow logs are enabled, and you can see them in cloudwatch.
 
 ### Logging and more logging. 📚
 
