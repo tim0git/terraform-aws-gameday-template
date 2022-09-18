@@ -39,6 +39,11 @@ public_load_balancer:
 autoscaling_group:
 	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/services/unicorn-rentals/autoscaling-group-ec2
 
+esc_service:
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/services/unicorn-rentals/ecs/roles
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/services/unicorn-rentals/ecs/ecr
+	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/services/unicorn-rentals/ecs/service
+
 aurora_serverless:
 	terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/database/aurora
 
