@@ -98,7 +98,6 @@ inputs = {
       service             = "ecr.api"
       private_dns_enabled = true
       subnet_ids          = dependency.vpc.outputs.private_subnets
-      policy              = templatefile("./templates/endpoint_policy.tftpl", { vpc_id = dependency.vpc.outputs.vpc_id, action = "*" })
       security_group_ids  = [dependency.vpc_endpoints_sg.outputs.security_group_id]
       tags    = { Name = "ecr-vpc-endpoint" }
     },
@@ -106,7 +105,6 @@ inputs = {
       service             = "ecr.dkr"
       private_dns_enabled = true
       subnet_ids          = dependency.vpc.outputs.private_subnets
-      policy              = templatefile("./templates/endpoint_policy.tftpl", { vpc_id = dependency.vpc.outputs.vpc_id, action = "*" })
       security_group_ids  = [dependency.vpc_endpoints_sg.outputs.security_group_id]
       tags    = { Name = "ecr-dkr-vpc-endpoint" }
     },
@@ -134,7 +132,6 @@ inputs = {
       service             = "secretsmanager"
       private_dns_enabled = true
       subnet_ids          = dependency.vpc.outputs.private_subnets
-      policy              = templatefile("./templates/endpoint_policy.tftpl", { vpc_id = dependency.vpc.outputs.vpc_id, action = "*" })
       security_group_ids  = [dependency.vpc_endpoints_sg.outputs.security_group_id]
       tags    = { Name = "secretsmanager-vpc-endpoint" }
     },
