@@ -27,8 +27,7 @@ inputs = {
   repository_name = local.account_name
 
   repository_read_write_access_arns = [
-    "arn:aws:iam::${local.aws_account_id}:root",
-    "arn:aws:iam::063778477900:role/UnicornRentalsServiceExecutionRole"
+    "arn:aws:iam::${local.aws_account_id}:root"
   ]
 
   create_lifecycle_policy           = true
