@@ -27,6 +27,16 @@ inputs = {
   ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules       = ["https-443-tcp", "http-80-tcp"]
 
-  egress_cidr_blocks = ["0.0.0.0/0"]
+  egress_cidr_blocks = ["10.0.0.0/21"]
   egress_rules       = ["http-80-tcp", "https-443-tcp"]
+
+  egress_with_cidr_blocks = [
+    {
+      from_port   = 8443
+      to_port     = 8443
+      protocol    = 6
+      description = "ECS Service Traffic"
+      cidr_blocks = "10.0.0.0/21"
+    }
+  ]
 }
