@@ -30,13 +30,12 @@ inputs = {
 
   ingress_with_source_security_group_id = [
     {
-      rule                     = "http-80-tcp"
+      from_port   = 8443
+      to_port     = 8443
+      protocol    = "tcp"
+      description = "Container port allow inbound traffic"
       source_security_group_id = dependency.public_application_load_balancer.outputs.security_group_id
-    },
-    {
-      rule                     = "https-443-tcp"
-      source_security_group_id = dependency.public_application_load_balancer.outputs.security_group_id
-    },
+    }
   ]
 
   egress_cidr_blocks = ["0.0.0.0/0"]
