@@ -12,7 +12,8 @@ locals {
   environment                = local.account_vars.locals.environment
 
   service_name   = "${local.account_name}-fargate"
-  container_port = 80
+  container_port = 8443
+  listener_port    = 80
   desired_count  = 3
 }
 
@@ -44,18 +45,13 @@ inputs = {
   environment    = local.environment
   region         = local.aws_region
   service_name   = local.service_name
-  ecs_cluster_id = dependency.cluster.outputs.cluster_id
-
-  lookup_vpc = true
-  vpc_lookup_tag = {
-    Name = "${local.account_name}"
-  }
 
   launch_type                          = "FARGATE"
   deployment_type                      = "ECS"
   enable_autoscaling                   = false
   network_mode                         = "awsvpc"
   desired_count                        = local.desired_count
+
   ignore_container_definitions_changes = false
   task_definition_settings = {
     name                 = lower(local.service_name)
@@ -81,6 +77,13 @@ inputs = {
 #      valueFrom : "arn:aws:ssm:${local.aws_region}:${local.aws_account_id}:parameter/password"
 #    }
 #  ]
+
+  ecs_cluster_id = dependency.cluster.outputs.cluster_id
+
+  lookup_vpc = true
+  vpc_lookup_tag = {
+    Name = "${local.account_name}"
+  }
 
   task_role_arn      = "arn:aws:iam::${local.aws_account_id}:role/UnicornRentalsTaskRole"
   execution_role_arn = "arn:aws:iam::${local.aws_account_id}:role/UnicornRentalsServiceExecutionRole"
@@ -109,11 +112,11 @@ inputs = {
     {
       port                = local.container_port
       interval            = "20"
-      path                = "/"
+      path                = "/api/health"
       protocol            = "HTTP"
       timeout             = "15"
       healthy_threshold   = "2"
-      unhealthy_threshold = "5"
+      unhealthy_threshold = "3"
       matcher             = "200,302"
     }
   ]
@@ -124,7 +127,7 @@ inputs = {
 
   lookup_alb           = true
   lookup_alb_name      = "${local.account_name}-public-alb"
-  lookup_listener_port = local.container_port
+  lookup_listener_port = local.listener_port
 
   create_log_group = true
   log_group_name   = lower(local.service_name)
