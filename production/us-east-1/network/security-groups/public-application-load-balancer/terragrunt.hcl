@@ -35,7 +35,7 @@ inputs = {
       from_port   = 8443
       to_port     = 8443
       protocol    = 6
-      description = "ECS Service Traffic"
+      description = "ECS Service traffic to custom container port"
       cidr_blocks = "10.0.0.0/21"
     }
   ]
