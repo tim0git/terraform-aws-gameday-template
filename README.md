@@ -49,13 +49,13 @@ Key Objectives:
 5. Perform Marketing Tasks
 6. Track down Unicorns that have wandered out of the stables
 7. Maintain service during Rainbow Day load.
-8. Use AI services to ensure that you have the appropriate levels of stock on hand to ensure that unicorns get to hirers.
+8. Use AI services to ensure that you have the appropriate levels of stock on hand to ensure that unicorns get to hires.
 
 The devops team believe that you are going to have to provision some compute (that can scale), expose the application running on that compute to the public.
 
 You may need a database to store the unicorn stock levels and possibly a SES and some lambdas to handle marketing.
 
-You may need to use some AI services (Sagemaker) to ensure that you have the appropriate levels of stock on hand to ensure that unicorns get to hirers.
+You may need to use some AI services (Sagemaker) to ensure that you have the appropriate levels of stock on hand to ensure that unicorns get to hires.
 
 That's alot to stand up in three hours! Good luck! ☘️
 
@@ -63,10 +63,10 @@ That's alot to stand up in three hours! Good luck! ☘️
 
 In the terminal run `make vpc`
 
->This will create a three layer highly available VPC. With 2048 Available IP Addresses. Each subnet has been allocated 128 IP's so that leaves you 896 available IP's for any other resources you may need.
+>This will create a three layer highly available VPC. With 2048 Available IP Addresses. Each subnet has been allocated 128 IPs so that leaves you 896 available IP's for any other resources you may need.
 >>A bit like this: But with a much smaller CIDR range. https://docs.aws.amazon.com/quickstart/latest/vpc/architecture.html
 
-The VPC has been configured with three NAT Gateways and a Internet Gateway. The NAT Gateway is used to allow the private subnets to access the internet. The Internet Gateway is used to allow the public subnets to access the internet.
+The VPC has been configured with three NAT Gateways and an Internet Gateway. The NAT Gateway is used to allow the private subnets to access the internet. The Internet Gateway is used to allow the public subnets to access the internet.
 
 VPC flow logs are enabled, and you can see them in cloudwatch.
 
@@ -117,7 +117,7 @@ You can completely customise these, just remember that you score points for well
 
 ### Unicorns don't use the internet? 🚫
 
-Now we are going to be using aws managed services. It's just a fact of life, something is going to have be kept in secrets or parameter store and you dont want to send all of your valuable logs ect out over the public internet so its time to create some private connections between these services and your VPC.
+Now we are going to be using aws managed services. It's just a fact of life, something is going to have be kept in secrets or parameter store, and you don't want to send all of your valuable logs ect out over the public internet, it's time to create some private connections between these services and your VPC.
 
 In the terminal run `make vpc_endpoints`
 
@@ -145,7 +145,7 @@ Don't forget to add the path, host and query greedy params if you do.
 
 Docs are here. https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html [Redirect actions]
 
-I have added a listener rule to 80 with an instance target group standing by for us. What's this for? Big hint is the word instance, we can use this target group for EC2 autoscaling groups. Its set to position 1 so any new listeners you add should take priority over this one. If not move it to the bottom in the console or traffic will flow to this one. 
+I have added a listener rule to 80 with an instance target group standing by for us. What's this for? Big hint is the word instance, we can use this target group for EC2 autoscaling groups. It's set to position 1 so any new listeners you add should take priority over this one. If not move it to the bottom in the console or traffic will flow to this one. 
 
 ### With great power, comes great responsibility (Decision time). 💭
 
@@ -154,7 +154,7 @@ For running your applications, we have set up two options.
 1. EC2 autoscaling group with a launch template.
 2. ECS Fargate service.
 
-Its upto you. you can use both or either. Or start with one and migrate to the other. There are alternatives to these available eg Elastic Beanstalk, Lambda and Elastic Kubernetes Service (EKS).
+Its upto you. you can use both or either. Or start with one and migrate to the other. There are alternatives to these available e.g. Elastic Beanstalk, Lambda and Elastic Kubernetes Service (EKS).
 
 >Choose wisely. This is game day, get something working, then make it right, then make it as fast, highly available, redundant and secure as you can. But, MAKE IT WORK first. 
 
@@ -197,7 +197,7 @@ By different port we mean something above 300 as all of those below are consider
 
 Therefore, we have set security-group rules and port mapping in the target group for 8443. If you are running you container on anything other than 8443 these will need to be changed.
 
->*Note: we have set the health check to /api/health this is the most common health check we can think of. It covers spring, apache, nginx ect.. But that does not mean your app will pass on this path. You only need a status code of 200 or 302 to be returned so amend the path in the terragrunt to suit your needs.*
+>*Note: we have set the health check to /api/health this is the most common health check we can think of. It covers spring, apache, nginx ect. But that does not mean your app will pass on this path. You only need a status code of 200 or 302 to be returned so amend the path in the terragrunt to suit your needs.*
 >>production/us-east-1/services/unicorn-rentals/ecs/service/terragrunt.hcl
 
 You can build the ecs service with `make ecs_service`
@@ -246,7 +246,7 @@ Once you have stood up the app you can navigate to the load balancer public endp
 
 After your infra is up you can work on your container and deploy it to the ecr.
 
->*Note: you will have to promote the listener rule for the ecs service above that of the autoscaling group. Do this in the console. Its two clicks.. We have done this so if you choose ec2 autoscaling group to start with and move to ecs after you can migrate back and forth between the two easily by changing the rule priority.*
+>*Note: you will have to promote the listener rule for the ecs service above that of the autoscaling group. Do this in the console. Its two clicks. We have done this so if you choose ec2 autoscaling group to start with and move to ecs after you can migrate back and forth between the two easily by changing the rule priority.*
 >>Docs are here: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/listener-update-rules.html [Reorder Rules]
 
 ### Opps! I need somewhere to store my unicorns. (database) 📦
@@ -259,7 +259,7 @@ We have tried to give you a broad spectrum of options here.
 
 #### RDS
 
-We have the tried and trusted rds. We have set this up as a autoscaling, postgres multi AZ instance.
+We have the tried and trusted rds. We have set this up as an autoscaling, postgres multi AZ instance.
 
 You can create this with `make rds`
 
@@ -283,7 +283,7 @@ This is a highly available fully scaling database.
 
 You can create this with `make aurora_serverless`
 
-Again this has been set up as a postgres db, but you can change the values here to mysql and we have left the comments just as we did for rds.
+Again this has been set up as a postgres db, but you can change the values here to mysql, and we have left the comments just as we did for rds.
 
 `production/us-east-1/database/aurora/terragrunt.hcl`
 
@@ -293,7 +293,7 @@ Again this has been set up as a postgres db, but you can change the values here 
 
 Docs are here: https://aws.amazon.com/getting-started/hands-on/migrate-rdsmysql-to-auroramysql/
 
->One *GOTCHA* with databases. The database creds are generated for you. These are sensitive so you won't see them in the console or the terminal after a plan.
+>One *GOTCHA* with databases. The database creds are generated for you. These are sensitive, so you won't see them in the console or the terminal after a plan.
 
 We've got you covered.
 
@@ -309,7 +309,7 @@ Open the file here. `production/us-east-1/database/dynamo/terragrunt.hcl` and ch
 
 You can create this with `make dynamodb`
 
-This isn't a fully optimised dynamodb with local secondary indexes ect. But for game day its will be more than quick enough should you need a non sql database. IF you end up with a read heavy dynamodb consider using DAX. ;-).
+This isn't a fully optimised dynamodb with local secondary indexes ect. But for game day it's will be more than quick enough should you need a non sql database. IF you end up with a read heavy dynamodb consider using DAX. ;-).
 
 All databases are encrypted and have automated backup / maintenance. We haven't added cross region replication as for the rds databases that would require a customer managed kms key.
 
