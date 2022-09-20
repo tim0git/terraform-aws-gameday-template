@@ -95,7 +95,7 @@ Its game day, they can't artificially change a regional spot price, can they?
 Hmm. Well if they do, you can change the balance between spot and on demand here. 
 `production/us-east-1/network/clusters/ecs/common/application.yml`
 
-### If your not on the list, you ain't coming in 📝
+### If you're not on the list, you ain't coming in 📝
 
 Right lets get some security in place, we don't want to be hacked on gameday do we?
 
