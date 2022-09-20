@@ -221,7 +221,7 @@ Build your docker image:
 
 `docker build --platform linux/amd64 -t devops-maintenance-page .`
 
-*Note: I have set docker as an alias to buildx see docs here: https://docs.docker.com/desktop/multi-arch/*
+*Note: In the above command I have set docker as an alias to buildx see docs here: https://docs.docker.com/desktop/multi-arch/*
 
 Then tag you image as latest using the <repo url> as the container name. A bit like this:
 
@@ -231,7 +231,7 @@ And finally push that image to the ecr.
 
 `docker push <repo name>:latest`
 
-Once the container has landed in teh ecr fargate will deploy it.
+Once the container has landed in the ecr you can deploy with a forced update.
 
 Fargate will always deploy the container with the latest tag, so if you upload a new container make sure to force a new deployment in the console.
 
