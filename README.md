@@ -245,6 +245,9 @@ Once you have stood up the app you can navigate to the load balancer public endp
 
 After your infra is up you can work on your container and deploy it to the ecr.
 
+>*Note: you will have to promote the listener rule for the ecs service above that of the autoscaling group. Do this in the console. Its two clicks.. We have done this so if you choose ec2 autoscaling group to start with and move to ecs after you can migrate back and forth between the two easily by changing the rule priority.*
+>>Docs are here: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/listener-update-rules.html [Reorder Rules]
+
 ### Opps! I need somewhere to store my unicorns. (database) 📦
 
 Now you may or may not need a database. But if you do, you can use this template to create one.
