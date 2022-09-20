@@ -390,7 +390,7 @@ Alternatively AWS offer a service that can help diagnose network issues. Search 
 10. [x] Create VPC Endpoints
 11. [x] Create Public ALB
 12. [x] Create AutoScaling Group
-13. [ ] Create Fargate ECS Service
+13. [x] Create Fargate ECS Service
 14. [x] Create DynamoDB Table
 15. [x] Create Aurora DB
 16. [x] Create RDS DB
