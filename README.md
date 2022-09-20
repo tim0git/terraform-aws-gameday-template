@@ -184,9 +184,66 @@ Once its up you can navigate to the load balancer public endpoint and see the re
 
 #### ECS Fargate
 
+This should be more familiar. Containers! 
+
+Now when we talk about scaling in terms of ec2 we talk in minutes. Even with a custom ami and no user data these things ain't exactly quick!
+
+Container on the other hand start in seconds. So all we need to wait for is the health check to pass. 
+
+We have to do some port shuffling here tho. With ec2 we can just expose the machine on port 80 no drama. 
+
+For container its best practice to run these asd non-root users. So we need to expose the container on a different port and then map that to port 80 on the container.
+
+By different port we mean something above 300 as all of those below are considered to be the OS ports. We have chosen 8443.
+
+Therefore, we have set security-group rules and port mapping in the target group for 8443. If you are running you container on anything other than 8443 these will need to be changed.
+
 You can build the ecs service with `make ecs_service`
 
-Once you have stood up the default app you can navigate to the load balancer public endpoint and see the response by using curl or the browser.
+>This will spin up an ecr for storing you container, an esc service powered by fargate and a couple of iam roles for the service and container.
+
+Build you docker container locally. For those of you on a newish Mac ie ARM architecture you will need to use buildx with docker to create a linux/amd64 container.
+
+Docs are here: https://docs.docker.com/desktop/multi-arch/
+
+After you have your container you will need to push it to your ecr.
+
+First we must authenticate against the ecr in your account. The command below will get authenticated credentials for you.
+
+*Make sure you have the aws cli installed and the default profile set. See Additional info at the bottom to help here.*
+
+`aws ecr get-login-password \                                                                                                                                                                                                        20:21:07
+--region us-east-1 | docker login \
+--username AWS \
+--password-stdin <repo url>`
+
+Build your docker image:
+
+`docker build --platform linux/amd64 -t devops-maintenance-page .`
+
+*Note: I have set docker as an alias to buildx see docs here: https://docs.docker.com/desktop/multi-arch/*
+
+Then tag you image as latest using the <repo url> as the container name. A bit like this:
+
+`docker tag devops-maintenance-page:latest <repo url>:latest`
+
+And finally push that image to the ecr.
+
+`docker push <repo name>:latest`
+
+Once the container has landed in teh ecr fargate will deploy it.
+
+Fargate will always deploy the container with the latest tag, so if you upload a new container make sure to force a new deployment in the console.
+
+Docs are here: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html
+
+I have put a sample web app in the following public docker repo.
+
+https://hub.docker.com/r/tim0git/devops-maintenance-page/tags
+
+Once you have stood up the app you can navigate to the load balancer public endpoint and see the response by using curl or the browser.
+
+After your infra is up you can work on your container and deploy it to the ecr.
 
 ### Opps! I need somewhere to store my unicorns. (database) 📦
 
