@@ -337,6 +337,16 @@ There is a 12-minute video here: https://www.youtube.com/watch?v=ULRnn6tIYu8
 
 And it's easy to set up in the console. Docs are here: https://docs.amazonaws.cn/en_us/AmazonRDS/latest/UserGuide/rds-proxy-setup.html
 
+#### Seeding your Database.
+
+If we do have to create a database then it will need some data.
+
+There are a million ways to get data into a database but here are a few links that may be of interest.
+
+S3 Import: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PostgreSQL.S3Import.html
+
+Database migration: https://docs.aws.amazon.com/dms/latest/sbs/dms-sbs-welcome.html
+
 ### Take a break, you've earned it ☕️.
 
 We haven't added any lambda or api gateway modules to this template. For many of you this stuff is what you do every day therefore, you don't need help from us. If you want to use these services and are unfamiliar with them, please shout out on teams and we will mob it together.
