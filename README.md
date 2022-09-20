@@ -249,6 +249,18 @@ After your infra is up you can work on your container and deploy it to the ecr.
 >*Note: you will have to promote the listener rule for the ecs service above that of the autoscaling group. Do this in the console. Its two clicks. We have done this so if you choose ec2 autoscaling group to start with and move to ecs after you can migrate back and forth between the two easily by changing the rule priority.*
 >>Docs are here: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/listener-update-rules.html [Reorder Rules]
 
+For scaling we have added a target tracking policy that scales the desired count in relation to requests. We have set the scale out value at 300 request per target (although this may be too low). And set the maximum number of tasks to 24.
+
+You are running on the smallest fargate task possible. 256 CPU and 512 MEMORY.
+
+Now containers scale fast! So don't be afraid to tinker with these values to reach the optimum compute balance.
+
+You can adjust these values in the local block here:
+
+`production/us-east-1/services/unicorn-rentals/ecs/service/terragrunt.hcl`
+
+Don't forget to run your make command again to update you're infra.
+
 ### Opps! I need somewhere to store my unicorns. (database) 📦
 
 Now you may or may not need a database. But if you do, you can use this template to create one.
