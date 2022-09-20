@@ -18,7 +18,7 @@ locals {
   instance_type     = "t3.medium" # Bursting instance, so we don't pay for unused capacity use t3.2xlarge for production
 
   estimated_instance_warmup = 240 # 4 minutes
-  target_tracking_value     = 100 # 100 requests per target
+  target_tracking_value     = 300 # 100 requests per target
 
   user_data = templatefile("./templates/user_data.tftpl", {})
 }
