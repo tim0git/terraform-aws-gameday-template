@@ -82,7 +82,7 @@ inputs = {
     },
     ec2 = {
       service             = "ec2"
-      private_dns_enabled = false
+      private_dns_enabled = true
       subnet_ids          = dependency.vpc.outputs.private_subnets
       security_group_ids  = [dependency.vpc_endpoints_sg.outputs.security_group_id]
       tags    = { Name = "ec2-vpc-endpoint" }
