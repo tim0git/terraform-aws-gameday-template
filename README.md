@@ -188,7 +188,7 @@ This should be more familiar. Containers!
 
 Now when we talk about scaling in terms of ec2 we talk in minutes. Even with a custom ami and no user data these things ain't exactly quick!
 
-Container on the other hand start in seconds. So all we need to wait for is the health check to pass. 
+Containers on the other hand start in seconds. So all we need to wait for is the health check to pass.
 
 We have to do some port shuffling here tho. With ec2 we can just expose the machine on port 80 no drama. 
 
@@ -198,6 +198,9 @@ By different port we mean something above 300 as all of those below are consider
 
 Therefore, we have set security-group rules and port mapping in the target group for 8443. If you are running you container on anything other than 8443 these will need to be changed.
 
+>*Note: we have set the health check to /api/health this is the most common health check we can think of. It covers spring, apache, nginx ect.. But that does not mean your app will pass on this path. You only need a status code of 200 or 302 to be returned so amend the path in the terragrunt to suit your needs.*
+>>production/us-east-1/services/unicorn-rentals/ecs/service/terragrunt.hcl
+
 You can build the ecs service with `make ecs_service`
 
 >This will spin up an ecr for storing you container, an esc service powered by fargate and a couple of iam roles for the service and container.
@@ -206,16 +209,15 @@ Build you docker container locally. For those of you on a newish Mac ie ARM arch
 
 Docs are here: https://docs.docker.com/desktop/multi-arch/
 
+If you want to go all fancy you can create a multi arch container with manifest ect. Currently, all aws services except lambda support manifests. But be cautious. This won't score you any points with the AWS folk unless you specifically tell them you are doing it!
+
 After you have your container you will need to push it to your ecr.
 
 First we must authenticate against the ecr in your account. The command below will get authenticated credentials for you.
 
 *Make sure you have the aws cli installed and the default profile set. See Additional info at the bottom to help here.*
 
-`aws ecr get-login-password \                                                                                                                                                                                                        20:21:07
---region us-east-1 | docker login \
---username AWS \
---password-stdin <repo url>`
+`aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <repo url>`
 
 Build your docker image:
 
