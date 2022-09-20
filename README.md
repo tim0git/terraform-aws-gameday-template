@@ -191,9 +191,9 @@ Containers on the other hand start in seconds. So all we need to wait for is the
 
 We have to do some port shuffling here tho. With ec2 we can just expose the machine on port 80 no drama. 
 
-For container its best practice to run these asd non-root users. So we need to expose the container on a different port and then map that to port 80 on the container.
+For container its best practice to run these as non-root users. So we need to expose the container on a different port and then map that to port 80 on the container.
 
-By different port we mean something above 300 as all of those below are considered to be the OS ports. We have chosen 8443.
+By different port we mean something above 3000 as all of those below are considered to be the OS ports. We have chosen 8443.
 
 Therefore, we have set security-group rules and port mapping in the target group for 8443. If you are running you container on anything other than 8443 these will need to be changed.
 
@@ -204,7 +204,7 @@ You can build the ecs service with `make ecs_service`
 
 >This will spin up an ecr for storing you container, an esc service powered by fargate and a couple of iam roles for the service and container.
 
-Build you docker container locally. For those of you on a newish Mac ie ARM architecture you will need to use buildx with docker to create a linux/amd64 container.
+Build your docker container locally. For those of you on a newish Mac ie ARM architecture you will need to use buildx with docker to create a linux/amd64 container.
 
 Docs are here: https://docs.docker.com/desktop/multi-arch/
 
@@ -309,7 +309,7 @@ Open the file here. `production/us-east-1/database/dynamo/terragrunt.hcl` and ch
 
 You can create this with `make dynamodb`
 
-This isn't a fully optimised dynamodb with local secondary indexes ect. But for game day it's will be more than quick enough should you need a non sql database. IF you end up with a read heavy dynamodb consider using DAX. ;-).
+This isn't a fully optimised dynamodb with local secondary indexes ect. But for game day it will be more than quick enough should you need a non sql database. IF you end up with a read heavy dynamodb consider using DAX. ;-).
 
 All databases are encrypted and have automated backup / maintenance. We haven't added cross region replication as for the rds databases that would require a customer managed kms key.
 
@@ -319,13 +319,15 @@ We have tried to keep this simple and easy to work with. If you fancy going all 
 
 You may want to create an RDS proxy. 
 
-This is a proxy that sits in front of your database and handles the connections. RDS Proxy is a great way to scale your database. It can also help with failover in your multi AZ deployment.
+This is a proxy that sits in front of your database and handles the connections. RDS Proxy is a great way to scale your database. It can also help with failover in your multi AZ deployment. For example you won't have to update the application with a new database url.
 
 There is a 12-minute video here: https://www.youtube.com/watch?v=ULRnn6tIYu8
 
-And it's easy to set up in the console. Doce are here: https://docs.amazonaws.cn/en_us/AmazonRDS/latest/UserGuide/rds-proxy-setup.html
+And it's easy to set up in the console. Docs are here: https://docs.amazonaws.cn/en_us/AmazonRDS/latest/UserGuide/rds-proxy-setup.html
 
 ### Take a break, you've earned it ☕️.
+
+We haven't added any lambda or api gateway modules to this template. For many of you this stuff is what you do every day therefore, you don't need help from us. If you want to use these services and are unfamiliar with them, please shout out on teams and we will mob it together.
 
 Once you have your infra up and running, get a brew and have a look at all the other services AWS has to offer. 
 
