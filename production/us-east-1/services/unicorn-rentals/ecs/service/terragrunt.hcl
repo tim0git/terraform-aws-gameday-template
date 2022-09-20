@@ -11,7 +11,7 @@ locals {
   aws_region                 = local.region_vars.locals.aws_region
   environment                = local.account_vars.locals.environment
 
-  service_name   = "${local.account_name}-fargate"
+  service_name   = "${local.account_name}"
   container_port = 8443
   listener_port    = 80
   desired_count  = 3
