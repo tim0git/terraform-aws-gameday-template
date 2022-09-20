@@ -38,8 +38,7 @@ Time is of the essence though, because three hours after the game starts, will b
 
 RAINBOW DAY!
 
-You've heard of Black Friday and Cyber Monday, but those both pale in comparison to Rainbow Day! Rainbow Day will be our biggest customer event ever and we expect to see the sky painted with rainbow-colored uni-contrails, but this will also have an impact on your franchise. During Rainbow Day, we expect you to have your infrastructure running and able to handle the load, to use AI services to ensure that you have the appropriate levels of stock on hand to ensure that unicorns get to hirers, and to ensure that everyone knows how special Rainbow Day actually is! The franchises that do these tasks the best will have eternal glory bestowed upon them.
-
+You've heard of Black Friday and Cyber Monday, but those both pale in comparison to Rainbow Day! Rainbow Day will be our biggest customer event ever, and we expect to see the sky painted with rainbow-colored uni-contrails, but this will also have an impact on your franchise. During Rainbow Day, we expect you to have your infrastructure running and able to handle the load, to use AI services to ensure that you have the appropriate levels of stock on hand to ensure that unicorns get to hires, and to ensure that everyone knows how special Rainbow Day actually is! The franchises that do these tasks the best will have eternal glory bestowed upon them.
 
 Key Objectives:
 
