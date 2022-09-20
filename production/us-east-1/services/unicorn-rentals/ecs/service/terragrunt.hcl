@@ -15,6 +15,10 @@ locals {
   container_port = 8443
   listener_port    = 80
   desired_count  = 3
+
+  target_tracking_scaling_value = 300
+  min_capacity = 3
+  max_capacity = 24
 }
 
 dependency "vpc_module" {
@@ -34,7 +38,7 @@ dependency "ecs_service_security_group" {
 }
 
 terraform {
-  source = "git@github.com:awazevr/terraform-aws-ecs-module.git//ecs/service-v2?ref=v4.1.0"
+  source = "git@github.com:awazevr/terraform-aws-ecs-module.git//ecs/service-v2?ref=v4.2.0"
 }
 
 include {
@@ -51,6 +55,13 @@ inputs = {
   enable_autoscaling                   = false
   network_mode                         = "awsvpc"
   desired_count                        = local.desired_count
+
+  enable_autoscaling = true
+  autoscaling_policy_type = "TargetTrackingScaling"
+  target_tracking_scaling_type = "ALBRequestCountPerTarget"
+  target_tracking_scaling_value = local.target_tracking_scaling_value
+  min_capacity = local.min_capacity
+  max_capacity = local.max_capacity
 
   ignore_container_definitions_changes = false
   task_definition_settings = {
@@ -79,6 +90,7 @@ inputs = {
 #  ]
 
   ecs_cluster_id = dependency.cluster.outputs.cluster_id
+  ecs_cluster_name = "common-cluster-v1"
 
   lookup_vpc = true
   vpc_lookup_tag = {
