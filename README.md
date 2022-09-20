@@ -145,7 +145,7 @@ Don't forget to add the path, host and query greedy params if you do.
 
 Docs are here. https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html [Redirect actions]
 
-I have added a listener rule to 80 with an instance target group standing by for us. What's this for? Big hint is the word instance, we can use this target group for EC2 autoscaling groups. It's set to position 1 so any new listeners you add should take priority over this one. If not move it to the bottom in the console or traffic will flow to this one. 
+I have added a listener rule to 80 with an instance target group standing by for us. What's this for? Big hint is the word instance, we can use this target group for EC2 autoscaling groups. It's set to position 1 so any new listeners you add WONT take priority over this one. If you create a new listener move the existing one to the bottom in the console or traffic will flow to this one. 
 
 ### With great power, comes great responsibility (Decision time). 💭
 
