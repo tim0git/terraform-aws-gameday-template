@@ -50,10 +50,10 @@ inputs = {
         protocol            = "HTTP"
         port                = 80
         path                = "/"
-        timeout             = "10"
+        timeout             = "15"
         interval            = "20"
-        healthy_threshold   = "3"
-        unhealthy_threshold = "2"
+        healthy_threshold   = "5"
+        unhealthy_threshold = "3"
       }
     }
   ]
