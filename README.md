@@ -372,9 +372,13 @@ We have compiled a list that are easy to configure in the console (click the big
 >* RDS Proxy
 
 ### Additional Info:
+
+#### Set AWS Default Profile
 If you are suing the aws cli then it may be helpful to set the default profile, this will prevent you from having to pass in the --profile flag with each command.
 
 `make set_aws_cli_default_profile`
+
+#### Detect drift
 
 During the gameday AWS Staff may decide to inject a bit of chaos into your environment. This may involve changing network settings so that you are no longer serving traffic.
 
@@ -385,6 +389,17 @@ Run `make detect_changes_to_security_groups` and or `make detect_changes_to_vpc`
 You can fix the changes in the console or run the make commands for the specific resource and terraform will resolve the drift.
 
 Alternatively AWS offer a service that can help diagnose network issues. Search in the console for Reach Analyser, it takes a few minutes to become familiar with but once you have used it a few times you will have full control over your network. 
+
+
+#### Terraform local cache
+
+If you need to remove local cache files and state lock then the below commands will recursively find these and remove them. 
+
+`find . -type f -name ".terraform.lock.hcl" -prune -exec rm -rf {} \;`
+
+`find . -type d -name ".terragrunt-cache" -prune -exec rm -rf {} \;`
+
+
 
 ------------------------------------------------------------------------------------------------------------------------------
 ### TODO
