@@ -73,3 +73,7 @@ detect_changes_to_security_groups:
 
 detect_changes_to_vpc:
 	terragrunt plan --terragrunt-non-interactive --terragrunt-working-dir ./production/us-east-1/network/vpc
+
+remove_terragrunt_cache_and_lock:
+	find . -type f -name ".terraform.lock.hcl" -prune -exec rm -rf {} \;
+	find . -type d -name ".terragrunt-cache" -prune -exec rm -rf {} \;
